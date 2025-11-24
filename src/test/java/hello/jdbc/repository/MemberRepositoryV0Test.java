@@ -34,6 +34,7 @@ class MemberRepositoryV0Test {
 
         //delete
         repository.delete(member.getMemberId());
+        // 회원이 없기 때문에 NoSuchElementException 이 발생
         assertThatThrownBy(() -> repository.findById(member.getMemberId()))
                 .isInstanceOf(NoSuchElementException.class);
     }
