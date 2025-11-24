@@ -15,6 +15,8 @@ import java.util.NoSuchElementException;
 @Slf4j
 public class MemberRepositoryV1 {
 
+    // DataSource 의존관계 주입
+    // DataSource 는 표준 인터페이스 이기 때문에 DriverManagerDataSource 에서 HikariDataSource 로 변경되어도 해당 코드를 변경하지 않아도 된다.
     private final DataSource dataSource;
 
     public MemberRepositoryV1(DataSource dataSource) {
@@ -118,6 +120,7 @@ public class MemberRepositoryV1 {
 
     }
 
+    // JdbcUtils 을 사용하면 커넥션을 좀 더 편리하게 닫을 수 있다.
     private void close(Connection con, Statement stmt, ResultSet rs) {
         JdbcUtils.closeResultSet(rs);
         JdbcUtils.closeStatement(stmt);
