@@ -56,18 +56,18 @@ create table member (
      primary key (member_id)
 );
 ```
-- 코드: src/main/java/hello/jdbc/domain/Member.java
-- 코드: src/main/java/hello/jdbc/repository/MemberRepositoryV0.java
-- 코드: src/test/java/hello/jdbc/repository/MemberRepositoryV0Test.java
+- [Member.java](/src/main/java/hello/jdbc/domain/Member.java)
+- [MemberRepositoryV0.java](/src/main/java/hello/jdbc/repository/MemberRepositoryV0.java)
+- [MemberRepositoryV0Test.java](/src/test/java/hello/jdbc/repository/MemberRepositoryV0Test.java)
 
 ## JDBC 개발 - 조회
 - JDBC를 통해 이전에 저장한 데이터를 조회하는 기능을 개발해보자
-- 코드: src/main/java/hello/jdbc/repository/MemberRepositoryV0.java
-- 코드: src/test/java/hello/jdbc/repository/MemberRepositoryV0Test.java
+- [MemberRepositoryV0.java](/src/main/java/hello/jdbc/repository/MemberRepositoryV0.java)
+- [MemberRepositoryV0Test.java](/src/test/java/hello/jdbc/repository/MemberRepositoryV0Test.java)
 
 ## JDBC 개발 - 수정, 삭제
 - 수정과 삭제는 등록과 비슷하다.
 - 등록, 수정, 삭제처럼 데이터를 변경하는 쿼리는 executeUpdate() 를 사용하면 된다.
 - 조회는 executeQuery() 를 사용한다.
-- 코드: src/main/java/hello/jdbc/repository/MemberRepositoryV0.java
-- 코드: src/test/java/hello/jdbc/repository/MemberRepositoryV0Test.java
+- [MemberRepositoryV0.java](/src/main/java/hello/jdbc/repository/MemberRepositoryV0.java)
+- [MemberRepositoryV0Test.java](/src/test/java/hello/jdbc/repository/MemberRepositoryV0Test.java)
