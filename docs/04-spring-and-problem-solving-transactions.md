@@ -44,10 +44,11 @@
 4. 트랜잭션이 종료되면 트랜잭션 매니저는 트랜잭션 동기화 매니저에 보관된 커넥션을 통해 트랜잭션을 종료하고, 커넥션도 닫는다.
 
 ## 트랜잭션 문제 해결 - 트랜잭션 매니저1
-- 코드: src/main/java/hello/jdbc/repository/MemberRepositoryV3.java
-- 코드: src/main/java/hello/jdbc/service/MemberServiceV3_1.java
-- 코드: src/test/java/hello/jdbc/service/MemberServiceV3_1Test.java
-- 전체 동작 흐름
+- [MemberRepositoryV3](/src/main/java/hello/jdbc/repository/MemberRepositoryV3.java)
+- [MemberServiceV3_1](/src/main/java/hello/jdbc/service/MemberServiceV3_1.java)
+- [MemberServiceV3_1Test](/src/test/java/hello/jdbc/service/MemberServiceV3_1Test.java)
+
+### 전체 동작 흐름
 
 ![](./images/614340583977900.png)
 ![](./images/614355072340500.png)
