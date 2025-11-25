@@ -24,12 +24,12 @@
 - 자바에서는 이를 위해서 DataSource 라는 인터페이스를 제공한다.
 - 이 인터페이스의 핵심 기능은 커넥션 조회 하나이다.
 ## Datasource 예제1 - DriverManager
-- 코드: src/test/java/hello/jdbc/connection/ConnectionTest.java
+- [ConnectionTest](/src/test/java/hello/jdbc/connection/ConnectionTest.java)
 ## Datasource 예제2 - 커넥션 풀
-- 코드: src/test/java/hello/jdbc/connection/ConnectionTest.java
+- [ConnectionTest](/src/test/java/hello/jdbc/connection/ConnectionTest.java)
 ## Datasource 적용
-- 코드: src/main/java/hello/jdbc/repository/MemberRepositoryV1.java
-- 코드: src/test/java/hello/jdbc/repository/MemberRepositoryV1Test.java
+- [MemberRepositoryV1](/src/main/java/hello/jdbc/repository/MemberRepositoryV1.java)
+- [MemberRepositoryV1Test](/src/test/java/hello/jdbc/repository/MemberRepositoryV1Test.java)
 ### DI (Dependency Injection)
 - DriverManagerDataSource HikariDataSource 로 변경해도 MemberRepositoryV1 의 코드는 전혀 변경하지 않아도 된다.
 - MemberRepositoryV1 는 DataSource 인터페이스에만 의존하기 때문이다. 이것이 DataSource 를 사용하는 장점이다
