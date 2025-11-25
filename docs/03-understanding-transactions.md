@@ -5,16 +5,16 @@
 - 모든 작업이 성공해서 데이터베이스에 정상 반영하는 것을 커밋( Commit )이라 하고,
 - 작업 중 하나라도 실패해서 거래 이전으로 되돌리는 것을 롤백( Rollback )이라 한다.
 ### 트랜잭션 ACID
-- 원자성: 트랜잭션 내에서 실행한 작업들은 마치 하나의 작업인 것처럼 모두 성공 하거나 모두 실패해야 한다.
-- 일관성: 모든 트랜잭션은 일관성 있는 데이터베이스 상태를 유지해야 한다.
-- 격리성: 동시에 실행되는 트랜잭션들이 서로에게 영향을 미치지 않도록 격리한다.
+- 원자성(Atomicity): 트랜잭션 내에서 실행한 작업들은 마치 하나의 작업인 것처럼 모두 성공 하거나 모두 실패해야 한다.
+- 일관성(Consistency): 모든 트랜잭션은 일관성 있는 데이터베이스 상태를 유지해야 한다.
+- 격리성(Isolation): 동시에 실행되는 트랜잭션들이 서로에게 영향을 미치지 않도록 격리한다.
   - 트랜잭션 간에 격리성을 완벽히 보장하려면 트랜잭션을 거의 순서대로 실행해야 한다. 이렇게 하면 동시 처리 성능이 매우 나빠진다.
   - 이런 문제로 인해 ANSI 표준은 트랜잭션의 격리 수준을 4단계로 나누어 정의했다.
     - READ UNCOMMITED(커밋되지 않은 읽기)
     - READ COMMITTED(커밋된 읽기)
     - REPEATABLE READ(반복 가능한 읽기)
     - SERIALIZABLE(직렬화 가능)
-- 지속성: 트랜잭션을 성공적으로 끝내면 그 결과가 항상 기록되어야 한다. 중간에 시스템에 문제가 발생해도 데이터베이스 로그 등을 사용해서 성공한 트랜잭션 내용을 복구해야 한다
+- 지속성(Durability): 트랜잭션을 성공적으로 끝내면 그 결과가 항상 기록되어야 한다. 중간에 시스템에 문제가 발생해도 데이터베이스 로그 등을 사용해서 성공한 트랜잭션 내용을 복구해야 한다
 ## 데이터베이스 연결 구조와 DB 세션
 ![img_1.png](images/img_1.png)
 - 사용자는 웹 애플리케이션 서버(WAS)나 DB 접근 툴 같은 클라이언트를 사용해서 데이터베이스 서버에 접근할수 있다.
@@ -72,8 +72,8 @@ set autocommit false;
 select * from member where member_id='memberA' for update;
 ```
 ## 트랜잭션 - 적용1
-- 코드: src/main/java/hello/jdbc/service/MemberServiceV1.java
-- 코드: src/test/java/hello/jdbc/service/MemberServiceV1Test.java
+- [MemberServiceV1](/src/main/java/hello/jdbc/service/MemberServiceV1.java)
+- [MemberServiceV1Test](/src/test/java/hello/jdbc/service/MemberServiceV1Test.java)
 ## 트랜잭션 - 적용2
 ### 애플리케이션에서 트랜잭션을 어떤 계층에 걸어야 할까?
 ![img_2.png](images/img_2.png)
@@ -83,6 +83,6 @@ select * from member where member_id='memberA' for update;
 - 결국 서비스 계층에서 커넥션을 만들고, 트랜잭션 커밋 이후에 커넥션을 종료해야 한다.
 - 애플리케이션에서 DB 트랜잭션을 사용하려면 트랜잭션을 사용하는 동안 같은 커넥션을 유지해야한다. 그래야 같은 세션을 사용할 수 있다.
 - 애플리케이션에서 같은 커넥션을 유지하려면 커넥션을 파라미터로 전달해서 같은 커넥션이 사용되도록 해야 한다.
-- 코드: src/main/java/hello/jdbc/repository/MemberRepositoryV2.java
-- 코드: src/main/java/hello/jdbc/service/MemberServiceV2.java
-- 코드: src/test/java/hello/jdbc/service/MemberServiceV2Test.java
+- [MemberRepositoryV2](/src/main/java/hello/jdbc/repository/MemberRepositoryV2.java)
+- [MemberServiceV2](/src/main/java/hello/jdbc/service/MemberServiceV2.java)
+- [MemberServiceV2Test](/src/test/java/hello/jdbc/service/MemberServiceV2Test.java)
