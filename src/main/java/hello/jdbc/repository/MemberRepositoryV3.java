@@ -30,6 +30,9 @@ public class MemberRepositoryV3 {
         PreparedStatement pstmt = null;
 
         try {
+            // DataSourceUtils.getConnection()
+            // 트랜잭션 동기화 매니저가 관리하는 커넥션이 있으면 해당 커넥션을 반환한다.
+            // 트랜잭션 동기화 매니저가 관리하는 커넥션이 없는 경우 새로운 커넥션을 생성해서 반환한다.
             con = getConnection();
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, member.getMemberId());
@@ -121,7 +124,10 @@ public class MemberRepositoryV3 {
     private void close(Connection con, Statement stmt, ResultSet rs) {
         JdbcUtils.closeResultSet(rs);
         JdbcUtils.closeStatement(stmt);
-        //주의! 트랜잭션 동기화를 사용하려면 DataSourceUtils를 사용해야 한다.
+        // 주의! 트랜잭션 동기화를 사용하려면 close()가 아니라 DataSourceUtils.releaseConnection()을 사용해야 한다.
+        // DataSourceUtils.releaseConnection() 을 사용하면 커넥션을 바로 닫는 것이 아니다.
+        // 트랜잭션을 사용하기 위해 동기화된 커넥션은 커넥션을 닫지 않고 그대로 유지해준다.
+        // 트랜잭션 동기화 매니저가 관리하는 커넥션이 없는 경우 해당 커넥션을 닫는다.
         DataSourceUtils.releaseConnection(con, dataSource);
     }
 

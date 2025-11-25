@@ -33,6 +33,7 @@ class MemberServiceV3_1Test {
     void before() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource(URL, USERNAME, PASSWORD);
         memberRepository = new MemberRepositoryV3(dataSource);
+        // JDBC 기술을 사용하므로, JDBC용 트랜잭션 매니저( `DataSourceTransactionManager )를 선택해서 서비스에 주입한다
         PlatformTransactionManager transactionManager = new DataSourceTransactionManager(dataSource);
         memberService = new MemberServiceV3_1(transactionManager, memberRepository);
     }

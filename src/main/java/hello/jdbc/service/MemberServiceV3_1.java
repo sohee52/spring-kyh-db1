@@ -18,19 +18,22 @@ import java.sql.SQLException;
 @RequiredArgsConstructor
 public class MemberServiceV3_1 {
 
+    // 트랜잭션 매니저를 주입 받는다.
+    // 주의! 예전에는 PlatformTransactionManager을 사용했지만, 이제는 DataSourceTransactionManager를 사용해야 한다.
     private final PlatformTransactionManager transactionManager;
     private final MemberRepositoryV3 memberRepository;
 
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
-        //트랜잭션 시작
+        // 트랜잭션 시작 : TransactionStatus status 를 반환한다.
+        // 현재 트랜잭션의 상태 정보가 포함되어 있다. 이후 트랜잭션을 커밋, 롤백할 때 필요하다.
         TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());
 
         try {
             //비즈니스 로직
             bizLogic(fromId, toId, money);
-            transactionManager.commit(status); //성공시 커밋
+            transactionManager.commit(status); // 성공시 커밋
         } catch (Exception e) {
-            transactionManager.rollback(status); //실패시 롤백
+            transactionManager.rollback(status); // 실패시 롤백
             throw new IllegalStateException(e);
         }
 

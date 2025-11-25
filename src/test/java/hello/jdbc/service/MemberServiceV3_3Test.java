@@ -15,6 +15,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
@@ -28,6 +29,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
  * 트랜잭션 - @Transactional AOP
  */
 @Slf4j
+// 스프링 AOP를 적용하려면 스프링 컨테이너가 필요하다.
+// 이 애노테이션이 있으면 테스트 시 스프링 부트를 통해 스프링 컨테이너를 생성한다.
 @SpringBootTest
 class MemberServiceV3_3Test {
 
@@ -35,11 +38,13 @@ class MemberServiceV3_3Test {
     public static final String MEMBER_B = "memberB";
     public static final String MEMBER_EX = "ex";
 
-    @Autowired
+    @Autowired // @Autowired 등을 통해 스프링 컨테이너가 관리하는 빈들을 사용할 수 있다.
     private MemberRepositoryV3 memberRepository;
     @Autowired
     private MemberServiceV3_3 memberService;
 
+    // 테스트 안에서 내부 설정 클래스를 만들고 @TestConfiguration 에노테이션을 붙이면,
+    // 필요한 스프링 빈들을 등록하고 테스트를 수행할 수 있다.
     @TestConfiguration
     static class TestConfig {
         @Bean

@@ -19,7 +19,7 @@ public class MemberServiceV3_3 {
         this.memberRepository = memberRepository;
     }
 
-    @Transactional
+    @Transactional // 트랜잭션 AOP 적용
     public void accountTransfer(String fromId, String toId, int money) throws SQLException {
         bizLogic(fromId, toId, money);
     }

@@ -42,6 +42,8 @@ class MemberServiceV3_4Test {
     @TestConfiguration
     static class TestConfig {
 
+        // 데이터소스와 트랜잭션 매니저를 스프링 빈으로 등록하는 코드가 생략되었다.
+        // 따라서 스프링 부트가 application.properties 에 지정된 속성을 참고해서 데이터소스와 트랜잭션 매니저를 자동으로 생성해준다.
         private final DataSource dataSource;
 
         public TestConfig(DataSource dataSource) {
