@@ -14,7 +14,7 @@
 ## 체크 예외 기본 이해
 - Exception 과 그 하위 예외는 모두 컴파일러가 체크하는 체크 예외이다. 단 RuntimeException 은 예외로 한다.
 - 체크 예외는 잡아서(catch) 처리하거나, 또는 밖으로 던지도록(throws) 선언해야한다. 그렇지 않으면 컴파일 오류가 발생한다.
-- 코드: src/test/java/hello/jdbc/exception/basic/CheckedTest.java
+- [CheckedTest](/src/test/java/hello/jdbc/exception/basic/CheckedTest.java)
 
 ### 체크 예외의 장단점
 - 장점: 개발자가 실수로 예외를 누락하지 않도록 컴파일러를 통해 문제를 잡아주는 훌륭한 안전 장치이다.
@@ -24,7 +24,7 @@
 - RuntimeException 과 그 하위 예외는 언체크 예외로 분류된다.
 - 언체크 예외는 말 그대로 컴파일러가 예외를 체크하지 않는다는 뜻이다.
 - 언체크 예외는 예외를 던지는 throws 를 선언하지 않고, 생략할 수 있다. 이 경우 자동으로 예외를 던진다.
-- 코드: src/test/java/hello/jdbc/exception/basic/UncheckedTest.java
+- [UncheckedTest](/src/test/java/hello/jdbc/exception/basic/UncheckedTest.java)
 
 ### 언체크 예외의 장단점
 - 장점: 신경쓰고 싶지 않은 언체크 예외를 무시할 수 있다. 체크 예외의 경우 처리할 수 없는 예외를 밖으로 던지려면 항상 throws 예외 를 선언해야 하지만, 언체크 예외는 이 부분을 생략할 수 있다. 이후에 설명하겠지만, 신경쓰고 싶지 않은 예외의 의존관계를 참조하지 않아도 되는 장점이 있다.
@@ -44,7 +44,7 @@
     - 로그인 ID, PW 불일치 예외
 
 ## 체크 예외 활용
-- 코드: src/test/java/hello/jdbc/exception/basic/CheckedAppTest.java
+- [CheckedAppTest](/src/test/java/hello/jdbc/exception/basic/CheckedAppTest.java)
 ### 체크 예외의 문제점
 - 처리할 수 있는 체크 예외라면 서비스나 컨트롤러에서 처리하겠지만,
 - 지금처럼 데이터베이스나 네트워크 통신처럼 시스템 레벨에서 올라온 예외들은 대부분 복구가 불가능하다.
@@ -53,7 +53,7 @@
 - 그래서 불필요한 의존관계 문제가 발생하게 된다.
 
 ## 언체크 예외 활용
-- 코드: src/test/java/hello/jdbc/exception/basic/UnCheckedAppTest.java
+- [UnCheckedAppTest](/src/test/java/hello/jdbc/exception/basic/UnCheckedAppTest.java)
 ### 언체크 예외의 장점
 - 시스템에서 발생한 예외는 대부분 복구 불가능 예외이다. 런타임 예외를 사용하면 서비스나 컨트롤러가 이런 복구 불가능한 예외를 신경쓰지 않아도 된다.
 - 컨트롤러와 서비스에서 해당 예외에 대한 의존 관계가 발생하지 않는다.
