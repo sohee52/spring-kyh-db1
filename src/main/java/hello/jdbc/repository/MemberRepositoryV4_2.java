@@ -42,7 +42,7 @@ public class MemberRepositoryV4_2 implements MemberRepository {
             pstmt.executeUpdate();
             return member;
         } catch (SQLException e) {
-            throw exTranslator.translate("save", sql, e);
+            throw exTranslator.translate("save", sql, e); // 스프링 예외 변환기를 사용하도록 변경
         } finally {
             close(con, pstmt, null);
         }

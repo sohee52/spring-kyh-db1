@@ -35,7 +35,7 @@ public class ExTranslatorV1Test {
     @Test
     void duplicateKeySave() {
         service.create("myId");
-        service.create("myId");//같은 ID 저장 시도
+        service.create("myId"); // 같은 ID 저장 시도
     }
 
     @Slf4j
@@ -45,18 +45,26 @@ public class ExTranslatorV1Test {
 
         public void create(String memberId) {
             try {
-                repository.save(new Member(memberId, 0));
+                repository.save(new Member(memberId, 0)); // 처음에 저장을 시도한다.
                 log.info("saveId={}", memberId);
-            } catch (MyDuplicateKeyException e) {
+            } catch (MyDuplicateKeyException e) { // 만약 리포지토리에서 MyDuplicateKeyException 예외가 올라오면 이 예외를 잡는다. 잡아서
                 log.info("키 중복, 복구 시도");
-                String retryId = generateNewId(memberId);
+                String retryId = generateNewId(memberId); // generateNewId(memberId) 로 새로운 ID 생성을 시도한다.
                 log.info("retryId={}", retryId);
-                repository.save(new Member(retryId, 0));
-            } catch (MyDbException e) {
+                repository.save(new Member(retryId, 0)); // 그리고 다시 저장한다.
+            } catch (MyDbException e) { // 복구할 수 없는 예외( MyDbException )면 로그만 남기고 다시 예외를 던진다.
                 log.info("데이터 접근 계층 예외", e);
                 throw e;
             }
         }
+
+//        실행해보면 다음과 같은 로그를 확인할 수 있다.
+//
+//        Service - saveId=myId
+//        Service - 키 중복, 복구 시도
+//        Service - retryId=myId492
+//`
+//        같은 ID를 저장했지만, 중간에 예외를 잡아서 복구한 것을 확인할 수 있다.
 
         private String generateNewId(String memberId) {
             return memberId + new Random().nextInt(10000);
@@ -82,8 +90,8 @@ public class ExTranslatorV1Test {
                 return member;
             } catch (SQLException e) {
                 //h2 db
-                if (e.getErrorCode() == 23505) {
-                    throw new MyDuplicateKeyException(e);
+                if (e.getErrorCode() == 23505) { // 오류 코드가 키 중복 오류( 23505 )인 경우
+                    throw new MyDuplicateKeyException(e); // MyDuplicateKeyException 을 새로 만들어서 서비스 계층에 던진다.
                 }
                 throw new MyDbException(e);
             } finally {

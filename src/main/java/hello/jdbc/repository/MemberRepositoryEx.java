@@ -4,6 +4,7 @@ import hello.jdbc.domain.Member;
 
 import java.sql.SQLException;
 
+// 체크 예외를 던지는 인터페이스
 public interface MemberRepositoryEx {
     Member save(Member member) throws SQLException;
 

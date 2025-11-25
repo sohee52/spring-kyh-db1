@@ -21,11 +21,11 @@ public class MemberServiceV4 {
     }
 
     @Transactional
-    public void accountTransfer(String fromId, String toId, int money) {
+    public void accountTransfer(String fromId, String toId, int money) { // SQLException 제거
         bizLogic(fromId, toId, money);
     }
 
-    private void bizLogic(String fromId, String toId, int money) {
+    private void bizLogic(String fromId, String toId, int money) { // SQLException 제거
         Member fromMember = memberRepository.findById(fromId);
         Member toMember = memberRepository.findById(toId);
 

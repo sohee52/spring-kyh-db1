@@ -1,5 +1,7 @@
 package hello.jdbc.repository.ex;
 
+// 기존에 사용했던 MyDbException 을 상속받아서 의미있는 계층을 형성한다.
+// 이렇게하면 데이터베이스 관련 예외라는 계층을 만들 수 있다.
 public class MyDuplicateKeyException extends MyDbException {
 
     public MyDuplicateKeyException() {

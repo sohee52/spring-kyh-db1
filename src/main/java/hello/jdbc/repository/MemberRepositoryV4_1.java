@@ -71,7 +71,7 @@ public class MemberRepositoryV4_1 implements MemberRepository {
             }
 
         } catch (SQLException e) {
-            throw new MyDbException(e);
+            throw new MyDbException(e); // 체크 예외를 런타임 예외로 변경
         } finally {
             close(con, pstmt, rs);
         }
