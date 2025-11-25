@@ -70,14 +70,15 @@ class MemberServiceV1Test {
         memberRepository.save(memberEx);
 
         //when
+        // memberEx 회원의 ID는 ex 이므로 중간에 예외가 발생한다.
         assertThatThrownBy(() -> memberService.accountTransfer(memberA.getMemberId(), memberEx.getMemberId(), 2000))
                 .isInstanceOf(IllegalStateException.class);
 
         //then
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
         Member findMemberB = memberRepository.findById(memberEx.getMemberId());
-        assertThat(findMemberA.getMoney()).isEqualTo(8000);
-        assertThat(findMemberB.getMoney()).isEqualTo(10000);
+        assertThat(findMemberA.getMoney()).isEqualTo(8000); // memberA 8000원 - 2000원 감소
+        assertThat(findMemberB.getMoney()).isEqualTo(10000); // memberEx 10000원 - 2000원 증가 안됨
     }
 
 }

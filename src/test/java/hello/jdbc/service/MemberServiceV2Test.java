@@ -77,7 +77,7 @@ class MemberServiceV2Test {
         //then
         Member findMemberA = memberRepository.findById(memberA.getMemberId());
         Member findMemberB = memberRepository.findById(memberEx.getMemberId());
-        assertThat(findMemberA.getMoney()).isEqualTo(10000);
+        assertThat(findMemberA.getMoney()).isEqualTo(10000); // 정상적으로 작동할 땐 8000원이 되지만, 여기선 예외가 발생하여 롤백으로 10000원
         assertThat(findMemberB.getMoney()).isEqualTo(10000);
     }
 

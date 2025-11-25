@@ -73,6 +73,7 @@ public class MemberRepositoryV2 {
 
     }
 
+    // Connection을 파라미터로 받는 findById
     public Member findById(Connection con, String memberId) throws SQLException {
         String sql = "select * from member where member_id = ?";
 
@@ -80,6 +81,7 @@ public class MemberRepositoryV2 {
         ResultSet rs = null;
 
         try {
+            // con = getConnection() 코드가 있으면 안된다. 파라미터로 받기 때문이다.
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, memberId);
 
@@ -97,7 +99,8 @@ public class MemberRepositoryV2 {
             log.error("db error", e);
             throw e;
         } finally {
-            //connection은 여기서 닫지 않는다.
+            // connection은 여기서 닫지 않는다. 이후에도 커넥션을 계속 이어서 사용하기 때문이다.
+            // 이후 서비스 로직이 끝날 때 트랜잭션을 종료하고 닫아야 한다.
             JdbcUtils.closeResultSet(rs);
             JdbcUtils.closeStatement(pstmt);
         }
@@ -126,12 +129,14 @@ public class MemberRepositoryV2 {
 
     }
 
+    // Connection을 파라미터로 받는 update
     public void update(Connection con, String memberId, int money) throws SQLException {
         String sql = "update member set money=? where member_id=?";
 
         PreparedStatement pstmt = null;
 
         try {
+            // con = getConnection() 코드가 있으면 안된다. 파라미터로 받기 때문이다.
             pstmt = con.prepareStatement(sql);
             pstmt.setInt(1, money);
             pstmt.setString(2, memberId);
@@ -141,7 +146,8 @@ public class MemberRepositoryV2 {
             log.error("db error", e);
             throw e;
         } finally {
-            //connection은 여기서 닫지 않는다.
+            // connection은 여기서 닫지 않는다. 이후에도 커넥션을 계속 이어서 사용하기 때문이다.
+            // 이후 서비스 로직이 끝날 때 트랜잭션을 종료하고 닫아야 한다.
             JdbcUtils.closeStatement(pstmt);
         }
 
