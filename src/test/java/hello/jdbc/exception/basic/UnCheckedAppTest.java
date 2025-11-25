@@ -59,8 +59,9 @@ public class UnCheckedAppTest {
         public void call() {
             try {
                 runSQL();
-            } catch (SQLException e) {
-                throw new RuntimeSQLException(e);
+            } catch (SQLException e) { // 체크 예외인 SQLException가 발생하면
+                throw new RuntimeSQLException(e); // 런타임 예외인 RuntimeSQLException로 전환해서 예외를 던진다.
+                // 이때 기존 예외를 포함해주어야 예외 출력시 스택 트레이스에서 기존 예외도 함께 확인할 수 있다.
             }
         }
 
