@@ -67,8 +67,8 @@ public class TransactionTemplate {
 }
 ```
 ### 코드
-- 코드: src/main/java/hello/jdbc/service/MemberServiceV3_2.java
-- 코드: src/test/java/hello/jdbc/service/MemberServiceV3_2Test.java
+- [MemberServiceV3_2](/src/main/java/hello/jdbc/service/MemberServiceV3_2.java)
+- [MemberServiceV3_2Test](/src/test/java/hello/jdbc/service/MemberServiceV3_2Test.java)
 ### 아직 남은 문제점
 - 트랜잭션 템플릿 덕분에, 트랜잭션을 사용할 때 반복하는 코드를 제거할 수 있었다.
 - 하지만 이곳은 서비스 로직인데 비즈니스 로직 뿐만 아니라 트랜잭션을 처리하는 기술 로직이 함께 포함되어 있다.
@@ -98,8 +98,8 @@ public class TransactionTemplate {
   - 어드바이스: TransactionIntercepto
 
 ## 트랜잭션 문제 해결 - 트랜잭션 AOP 적용
-- 코드: src/main/java/hello/jdbc/service/MemberServiceV3_3.java
-- 코드: src/test/java/hello/jdbc/service/MemberServiceV3_3Test.java
+- [MemberServiceV3_3](/src/main/java/hello/jdbc/service/MemberServiceV3_3.java)
+- [MemberServiceV3_3Test](/src/test/java/hello/jdbc/service/MemberServiceV3_3Test.java)
 
 ## 트랜잭션 문제 해결 - 트랜잭션 AOP 정리
 ### 선언적 트랜잭션 관리 vs 프로그래밍 방식 트랜잭션 관리
@@ -140,4 +140,4 @@ spring.datasource.password=
   - JPA를 사용하면 JpaTransactionManager 를 빈으로 등록한다.
   - 둘다 사용하는 경우 JpaTransactionManager 를 등록한다.
   - 참고로 JpaTransactionManager 는 DataSourceTransactionManager 가 제공하는 기능도 대부분 지원한다.
-- 코드: src/test/java/hello/jdbc/service/MemberServiceV3_4Test.java
+- [MemberServiceV3_4Test](/src/test/java/hello/jdbc/service/MemberServiceV3_4Test.java)
