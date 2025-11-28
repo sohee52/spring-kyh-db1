@@ -59,7 +59,7 @@
 
 ### 스프링이 제공하는 예외 변환기
 - 스프링은 예외 변환기를 제공한다. 예외 변환기는 특정 기술에 종속적인 예외를 스프링이 제공하는 예외로 변환해준다.
-- 코드: src/test/java/hello/jdbc/exception/translator/SpringExceptionTranslatorTest.java
+- [SpringExceptionTranslatorTest](/src/test/java/hello/jdbc/exception/translator/SpringExceptionTranslatorTest.java)
 - 스프링은 데이터 접근 계층에 대한 일관된 예외 추상화를 제공한다.
 - 스프링은 예외 변환기를 통해서 SQLException 의 ErrorCode 에 맞는 적절한 스프링 데이터 접근 예외로 변환해준다.
 - 스프링 예외 추상화 덕분에 특정 기술에 종속적이지 않게 되었다.
